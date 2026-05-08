@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbería Elegant | Estilo y Tradición</title>
+    <!-- Importamos fuentes de Google Fonts para un toque distinguido -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <!-- Iconos de FontAwesome para elementos visuales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- VARIABLES Y CONFIGURACIÓN GENERAL --- */
+        :root {
+            /* Paleta de colores más serios y premium */
+            --bg-dark: #0f1014;       /* Negro casi absoluto para fondos profundos */
+            --bg-card: #1b1d24;       /* Gris muy oscuro para tarjetas */
+            --gold-main: #d4af37;     /* Dorado metálico clásico */
+            --gold-hover: #f1c40f;    /* Dorado más brillante para interacción */
+            --text-light: #f0f0f0;    /* Blanco roto para lectura cómoda */
+            --text-muted: #a0a0a0;    /* Gris para textos secundarios */
+            --accent-red: #8b0000;    /* Un rojo oscuro muy sutil para detalles vintage */
+            
+            --font-heading: 'Cinzel', serif;      /* Fuente elegante para títulos */
+            --font-body: 'Montserrat', sans-serif; /* Fuente moderna y limpia para textos */
+            
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative; /* Necesario para el z-index de la marca de agua */
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- UTILIDADES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .text-center { text-align: center; }
+        .gold-text { color: var(--gold-main); }
+
+        /* --- BOTONES --- */
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            background: linear-gradient(45deg, var(--gold-main), #b8860b);
+            color: var(--bg-dark);
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 2px; /* Bordes ligeramente cuadrados para seriedad */
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+            background: linear-gradient(45deg, var(--gold-hover), var(--gold-main));
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--gold-main);
+            color: var(--gold-main);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--gold-main);
+            color: var(--bg-dark);
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 16, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-main);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--gold-main); }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            /* AQUÍ ESTÁ LA NUEVA IMAGEN DE LOS LAGOS (VOLCÁN OSORNO) */
+            background: linear-gradient(rgba(15, 16, 20, 0.6), rgba(15, 16, 20, 0.8)), 
+                        url('https://images.unsplash.com/photo-1596399253986-98225423a896?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            margin-top: 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 20px;
+            animation: fadeIn Up 1s ease-out;
+            z-index: 2; /* Asegura que el texto esté sobre la marca de agua */
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .separator {
+            width: 80px;
+            height: 3px;
+            background: var(--gold-main);
+            margin: 0 auto 20px auto;
+        }
+
+        /* --- SERVICES --- */
+        .services-section {
+            background-color: var(--bg-dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--text-light);
+        }
+
+        .grid-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 4px; /* Bordes suaves */
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gold-main);
+            transform: scaleX(0);
+            transition: var(--transition);
+            transform-origin: left;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .icon-box {
+            font-size: 3rem;
+            color: var(--gold-main);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .price {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold-main);
+            margin-top: 15px;
+            font-family: var(--font-heading);
+        }
+
+        .service-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* --- GALERIA / ABOUT --- */
+        .about-section {
+            background: linear-gradient(to right, #15161a 50%, #1b1d24 50%);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            height: 500px;
+            background: url('https://picsum.photos/seed/barberchair/800/800') center/cover;
+            position: relative;
+        }
+        
+        .about-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding: 60px;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+
+        /* --- CONTACTO --- */
+        .contact-section {
+            background: var(--bg-card);
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .contact-info, .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-main);
+            font-size: 1.2rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .info-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--text-light);
+        }
+
+        .info-content p {
+            color: var(--text-muted);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            background: var(--bg-dark);
+            border: 1px solid #333;
+            color: var(--text-light);
+            border-radius: 4px;
+            font-family: var(--font-body);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--gold-main);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #000;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #222;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-icons {
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            background: #222;
+            color: var(--text-light);
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--gold-main);
+            color: var(--bg-dark);
+            transform: scale(1.1);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* --- NOTIFICACION (Toast) --- */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--gold-main);
+            color: var(--bg-dark);
+            padding: 15px 25px;
+            border-radius: 4px;
+            font-weight: 600;
+            transform: translateY(150%);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+        }
+
+        /* --- MARCA DE AGUA (CORREGIDA: DERECHA, MÁS GRANDE Y CON C) --- */
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* SE ELIMINÓ LA ROTACIÓN PARA QUE ESTÉ DERECHA */
+            
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900; /* Muy gruesa */
+            font-size: 10rem; /* MÁS GRANDE */
+            
+            color: rgba(255, 255, 255, 0.08); /* Un poco más visible */
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 0;
+            letter-spacing: 10px; /* Más separación */
+            text-transform: lowercase; 
+            text-align: center;
+            width: 100%;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { display: none; } 
+            .about-section { background: var(--bg-dark); flex-direction: column; }
+            .about-image { width: 100%; height: 300px; }
+            .about-text { padding: 40px 20px; }
+            .contact-container { flex-direction: column; }
+            
+            /* Ajuste para que no se vea gigante en celulares */
+            .watermark {
+                font-size: 5rem; /* Se reduce tamaño en móvil pero sigue grande */
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        /* Animaciones simples */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-scissors"></i> BARBERÍA ELEGANT
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+                <!-- Botón móvil (solo visual para este demo) -->
+                <div style="display:none;" class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1 class="gold-text">Estilo & Caballeros</h1>
+            <div class="separator"></div>
+            <p>La experiencia de corte premium en el corazón de Santiago Centro. <br>Donde la tradición se encuentra con el estilo moderno.</p>
+            <a href="#contacto" class="btn">Reservar Cita</a>
+            <a href="#servicios" class="btn btn-outline" style="margin-left: 10px;">Ver Menú</a>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="section-padding services-section">
+        <div class="container">
+            <div class="text-center section-header">
+                <h2>Nuestros Servicios</h2>
+                <p class="gold-text" style="font-weight: 600; letter-spacing: 3px;">EXCELENCIA EN CADA DETALLE</p>
+                <div class="separator"></div>
+            </div>
+
+            <div class="grid-services">
+                <!-- Tarjeta 1 -->
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-cut"></i></div>
+                    <h3>Corte Clásico</h3>
+                    <p class="service-desc">Tijera o máquina, acabado perfecto según tu estructura facial.</p>
+                    <span class="price">$12.000</span>
+                </div>
+
+                <!-- Tarjeta 2 -->
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-user-tie"></i></div>
+                    <h3>Servicio Completo</h3>
+                    <p class="service-desc">Corte de cabello + perfilado y arreglo de barba con toalla caliente.</p>
+                    <span class="price">$18.000</span>
+                </div>
+
+                <!-- Tarjeta 3 -->
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-razor"></i></div>
+                    <h3>Perfilado de Barba</h3>
+                    <p class="service-desc">Delineado preciso, aceites esenciales y masaje relajante.</p>
+                    <span class="price">$8.000</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nosotros / Imagen -->
+    <section id="nosotros" class="about-section">
+        <div class="about-image"></div>
+        <div class="about-text">
+            <h4 class="gold-text">SOBRE NOSOTROS</h4>
+            <h2>Más que un corte, <br>una experiencia.</h2>
+            <p>En Barbería Elegant, creemos que cada caballero merece un momento para sí mismo. Nuestro local en Santiago Centro está diseñado para ofrecerte un ambiente relajado, con música seleccionada y un servicio de primera.</p>
+            <p>Utilizamos herramientas de gama alta y productos orgánicos para garantizar que tu cabello y piel reciban el mejor cuidado posible.</p>
+            <a href="#contacto" class="btn btn-outline">Conoce al Equipo</a>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="section-padding contact-section">
+        <div class="container">
+            <div class="text-center section-header">
+                <h2>Reserva tu Espacio</h2>
+                <p class="gold-text" style="font-weight: 600;">AGENDA TU CITA HOY MISMO</p>
+                <div class="separator"></div>
+            </div>
+
+            <div class="contact-container">
+                <!-- Información -->
+                <div class="contact-info">
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="info-content">
+                            <h4>Ubicación</h4>
+                            <p>Av. Libertador Bernardo O'Higgins 1234, Santiago Centro</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-clock"></i></div>
+                        <div class="info-content">
+                            <h4>Horario</h4>
+                            <p>Lun - Sab: 10:00 AM - 20:00 PM<br>Dom: Cerrado</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div class="info-content">
+                            <h4>Teléfono</h4>
+                            <p>+56 9 1234 5678</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 40px;">
+                        <p style="margin-bottom: 15px; color: var(--text-light);">¿Prefieres atención inmediata?</p>
+                        <a href="https://wa.me/56912345678?text=Hola,%20quisiera%20agendar%20una%20cita%20en%20Barbería%20Elegant" target="_blank" class="btn" style="background: #25D366; color: white; box-shadow: none;">
+                            <i class="fab fa-whatsapp"></i> Reservar por WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Formulario -->
+                <div class="contact-form">
+                    <h3 style="margin-bottom: 20px;">Envíanos un mensaje</h3>
+                    <form id="bookingForm" onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Tu Nombre Completo" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Tu Correo Electrónico" required>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control">
+                                <option value="" disabled selected>Selecciona Servicio</option>
+                                <option value="corte">Corte Clásico</option>
+                                <option value="completo">Corte + Barba</option>
+                                <option value="barba">Perfilado de Barba</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Detalles adicionales (Fecha y Hora preferida)"></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">Enviar Solicitud</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p class="copyright">&copy; 2023 Barbería Elegant. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Notificación Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i> Solicitud enviada correctamente.
+    </div>
+
+    <!-- MARCA DE AGUA CORREGIDA (LOGICA) -->
+    <div class="watermark">seba_logica 0-1</div>
+
+    <!-- Scripts simples para interactividad -->
+    <script>
+        // Manejo del formulario para simular envío
+        function handleSubmit(event) {
+            event.preventDefault();
+            const btn = event.target.querySelector('button');
+            const originalText = btn.innerText;
+            
+            btn.innerText = "Enviando...";
+            btn.style.opacity = "0.7";
+
+            // Simulamos tiempo de red
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.opacity = "1";
+                showToast();
+                event.target.reset();
+            }, 1500);
+        }
+
+        // Mostrar notificación
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Cambio de estilo del header al hacer scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.style.padding = '10px 0';
+                header.style.background = 'rgba(15, 16, 20, 0.98)';
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.3)';
+            } else {
+                header.style.padding = '15px 0';
+                header.style.background = 'rgba(15, 16, 20, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
